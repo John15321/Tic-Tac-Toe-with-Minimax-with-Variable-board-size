@@ -10,6 +10,7 @@ screen_color = (245, 167, 167)  # very darker blue/purple
 hover_color_for_buttons = (249, 216, 156)
 background_color_for_buttons = (130, 196, 195)
 
+
 class Button:
     '''
     Parent Button class
@@ -53,7 +54,7 @@ class ButtonWithText(Button):
         Draws the button with a different color as background when hovered over
         '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
-                                                     self.y_position, self.width, self.height))
+                                                    self.y_position, self.width, self.height))
         screen.blit(self.text_render, (self.x_position +
                                        self.padding_x, self.y_position+self.padding_y))
 
@@ -69,6 +70,7 @@ class ButtonWithText(Button):
 
     def is_clicked(self):
         print("Clicked")
+        screen = pygame.display.set_mode((900, 900))
 
 
 class ButtonWithImage(Button):
@@ -120,6 +122,7 @@ class ButtonWithImage(Button):
 
     def is_clicked(self):
         print("Clicked")
+        screen = pygame.display.set_mode((500, 500))
 
 
 # Creating the screen
@@ -163,6 +166,10 @@ def game_main_menu():
                 each.show_button()
 
         pygame.display.update()
+
+
+def main_game_loop():
+    pass
 
 
 game_main_menu()
