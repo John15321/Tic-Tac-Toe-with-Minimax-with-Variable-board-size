@@ -1,26 +1,27 @@
 #!/usr/bin/python
 
 import pygame
-import buttons
 
 # Initializing PyGame
 pygame.init()
 
+# screen color (in RGB)
+screen_color = (245, 167, 167)  # very darker blue/purple
+hover_color_for_buttons = (249, 216, 156)
+background_color_for_buttons = (130, 196, 195)
 
-<<<<<<< HEAD
-=======
 class Button:
     '''
     Parent Button class
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color, hover_color):
+    def __init__(self, x_position, y_position,  width, height, button_color):
         self.x_position = x_position
         self.y_position = y_position
         self.width = width
         self.height = height
         self.button_color = button_color
-        self.hover_color = hover_color
+        self.hover_color = hover_color_for_buttons
 
 
 class ButtonWithText(Button):
@@ -28,9 +29,9 @@ class ButtonWithText(Button):
     A class for text that is contained inside buttons
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color, hover_color, text, text_color=(0, 0, 0), padding_x=0, padding_y=0):
+    def __init__(self, x_position, y_position,  width, height, button_color, text, text_color=(0, 0, 0), padding_x=0, padding_y=0):
         super().__init__(x_position, y_position,
-                         width, height, button_color, hover_color)
+                         width, height, button_color)
         self.text = text
         self.text_color = text_color
         self.font = pygame.font.Font('freesansbold.ttf', 16)
@@ -75,9 +76,9 @@ class ButtonWithImage(Button):
     A class for text that is contained inside buttons
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color, hover_color, button_image, padding_x=0, padding_y=0):
+    def __init__(self, x_position, y_position,  width, height, button_color, button_image, padding_x=0, padding_y=0):
         super().__init__(x_position, y_position,
-                         width, height, button_color, hover_color)
+                         width, height, button_color)
         self.button_image = pygame.image.load(button_image)
         self.padding_x = padding_x
         self.padding_y = padding_y
@@ -120,7 +121,6 @@ class ButtonWithImage(Button):
     def is_clicked(self):
         print("Clicked")
 
->>>>>>> parent of a93ebf0... .
 
 # Creating the screen
 # screen size (has to be a tuple: width x height)
@@ -128,10 +128,6 @@ screen_width = 800
 screen_height = 600
 screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size)
-# screen color (in RGB)
-screen_color = (245, 167, 167)  # very darker blue/purple
-hover_color_for_buttons = (249, 216, 156)
-background_color_for_buttons = (130, 196, 195)
 
 # Title and Icon
 pygame.display.set_caption("Tic Tac Toe")
@@ -141,9 +137,9 @@ pygame.display.set_icon(pygame.image.load("./Resources/game_icon.png"))
 def game_main_menu():
     MAIN_MENU = True
     button = ButtonWithText(0, 0, 100, 50,
-                            background_color_for_buttons, hover_color_for_buttons, "TEST", (0, 0, 0), 10, 10)
+                            background_color_for_buttons, "TEST", (0, 0, 0), 10, 10)
     button2 = ButtonWithImage(
-        100, 100, 64, 64, background_color_for_buttons, hover_color_for_buttons, "./Resources/cross_icon.png")
+        100, 100, 64, 64, background_color_for_buttons, "./Resources/cross_icon.png")
     buttons = [button, button2]
 
     while MAIN_MENU:
