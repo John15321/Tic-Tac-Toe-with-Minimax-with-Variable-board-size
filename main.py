@@ -15,9 +15,9 @@ class Button:
     Parent Button class
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color):
-        self.x_position = x_position
-        self.y_position = y_position
+    def __init__(self, x, y,  width, height, button_color):
+        self.x_position = x
+        self.y_position = y
         self.width = width
         self.height = height
         self.button_color = button_color
@@ -29,8 +29,8 @@ class ButtonWithText(Button):
     A class for text that is contained inside buttons
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color, text, text_color=(0, 0, 0), padding_x=0, padding_y=0):
-        super().__init__(x_position, y_position,
+    def __init__(self, x, y,  width, height, button_color, text, text_color=(0, 0, 0), padding_x=0, padding_y=0):
+        super().__init__(x, y,
                          width, height, button_color)
         self.text = text
         self.text_color = text_color
@@ -76,8 +76,8 @@ class ButtonWithImage(Button):
     A class for text that is contained inside buttons
     '''
 
-    def __init__(self, x_position, y_position,  width, height, button_color, button_image, padding_x=0, padding_y=0):
-        super().__init__(x_position, y_position,
+    def __init__(self, x, y,  width, height, button_color, button_image, padding_x=0, padding_y=0):
+        super().__init__(x, y,
                          width, height, button_color)
         self.button_image = pygame.image.load(button_image)
         self.padding_x = padding_x
