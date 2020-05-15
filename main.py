@@ -49,7 +49,7 @@ class ButtonWithText(Button):
         Draws the button with a different color as background when hovered over
         '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
-                                                     self.y_position, self.width, self.height))
+                                                    self.y_position, self.width, self.height))
         screen.blit(self.text_render, (self.x_position +
                                        self.padding_x, self.y_position+self.padding_y))
 
