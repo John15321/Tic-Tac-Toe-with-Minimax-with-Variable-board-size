@@ -64,8 +64,6 @@ class ButtonWithText(Button):
         screen = pygame.display.set_mode((500, 500))
 
 
-
-
 class ButtonWithImage(Button):
     '''
     A class for text that is contained inside buttons
