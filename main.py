@@ -51,7 +51,7 @@ def game_main_menu():
                 each.show_button()
 
         # Checking if buttons that show board_size and row_win
-        #  are either hovered over or clicked
+        # are either hovered over or clicked
         if button_board_size_show.is_over(mouse_position):
             button_board_size_show.hovered(str(Board.get_board_size()))
         else:
