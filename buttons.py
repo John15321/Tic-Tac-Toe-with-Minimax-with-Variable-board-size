@@ -3,6 +3,7 @@ Module responsible for implementing button mechanics using pygame
 '''
 import pygame
 from config import *
+from board import *
 
 
 class Button:
