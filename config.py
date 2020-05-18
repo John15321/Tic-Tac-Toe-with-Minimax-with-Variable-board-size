@@ -25,7 +25,8 @@ screen = pygame.display.set_mode(screen_size)
 class Board:
     '''
     This class describes properties of the game board like its size and the number of
-    rows required to "paint" in order to win
+    rows required to "paint" in order to win. It operates on class variables and @classmethod's 
+    because there is going to be only one board. Therefore we can work with class variables.
     '''
 
     board_size = 1
@@ -34,7 +35,7 @@ class Board:
     @classmethod
     def get_board_size(cls):
         '''
-        Get board_size value (int)
+        Get board_size value (int).
         It is a @classmethod, meaning you get the class variable value
         '''
         return cls.board_size
@@ -42,7 +43,7 @@ class Board:
     @classmethod
     def get_row_win(cls):
         '''
-        Get row_win value (int)
+        Get row_win value (int).
         It is a @classmethod, meaning you get the class variable value
         '''
         return cls.row_win
@@ -50,7 +51,7 @@ class Board:
     @classmethod
     def set_board_size(cls, new_board_size):
         '''
-        Set board_size (int)
+        Set board_size (int).
         It is a @classmethod, meaning you set the class variable value
         '''
         cls.board_size = new_board_size
@@ -58,7 +59,7 @@ class Board:
     @classmethod
     def set_row_win(cls, new_row_win):
         '''
-        Set row_win value (int)
+        Set row_win value (int).
         It is a @classmethod, meaning you set the class variable value
         '''
         cls.row_win = new_row_win
@@ -66,7 +67,7 @@ class Board:
     @classmethod
     def increment_board_size(cls):
         '''
-        Increment board_size value by 1
+        Increment board_size value by 1.
         It is a @classmethod, meaning you increment the class variable value
         '''
         cls.board_size += 1
@@ -74,7 +75,7 @@ class Board:
     @classmethod
     def increment_row_win(cls):
         '''
-        Increment row_win value by 1
+        Increment row_win value by 1.
         It is a @classmethod, meaning you increment the class variable value
         '''
         cls.row_win += 1
@@ -82,7 +83,7 @@ class Board:
     @classmethod
     def decrement_board_size(cls):
         '''
-        Decrement board_size value by 1
+        Decrement board_size value by 1.
         It is a @classmethod, meaning you decrement the class variable value
         '''
         if (cls.board_size-1) != 0:
@@ -91,7 +92,7 @@ class Board:
     @classmethod
     def decrement_row_win(cls):
         '''
-        Decrement row_win value by 1
+        Decrement row_win value by 1.
         It is a @classmethod, meaning you decrement the class variable value
         '''
         if (cls.row_win-1) != 0:
