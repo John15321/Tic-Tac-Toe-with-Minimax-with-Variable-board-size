@@ -1,3 +1,6 @@
+'''
+Module responsible for implementing button mechanics using pygame
+'''
 import pygame
 from config import *
 
@@ -26,28 +29,28 @@ class ButtonWithText(Button):
                          width, height, button_color)
         self.text = text
         self.text_color = text_color
-        self.font = pygame.font.Font('freesansbold.ttf', 16)
+        self.font = pygame.font.Font('freesansbold.ttf', 32)
         self.text_render = self.font.render(self.text, True, self.text_color)
         self.padding_x = padding_x
         self.padding_y = padding_y
 
-    def show_button(self):
+    def show_button(self, txt_to_show):
         '''
         Function for showing a given button with its set positions and values, etc.
         '''
         pygame.draw.rect(screen, self.button_color, (self.x_position,
                                                      self.y_position, self.width, self.height))
-        screen.blit(self.text_render, (self.x_position +
-                                       self.padding_x, self.y_position + self.padding_y))
+        screen.blit(self.font.render(txt_to_show, True, self.text_color), (self.x_position +
+                                                                           self.padding_x, self.y_position + self.padding_y))
 
-    def is_hovered(self):
+    def is_hovered(self, txt_to_show):
         '''
         Draws the button with a different color as background when hovered over
         '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
                                                     self.y_position, self.width, self.height))
-        screen.blit(self.text_render, (self.x_position +
-                                       self.padding_x, self.y_position + self.padding_y))
+        screen.blit(self.font.render(txt_to_show, True, self.text_color),
+                    (self.x_position + self.padding_x, self.y_position + self.padding_y))
 
     def is_over(self, mouse_pos):
         '''
@@ -60,8 +63,10 @@ class ButtonWithText(Button):
             return False
 
     def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
         print("Clicked")
-        screen = pygame.display.set_mode((500, 500))
 
 
 class ButtonWithImage(Button):
@@ -90,6 +95,9 @@ class ButtonWithImage(Button):
                                         self.padding_x, self.y_position + self.padding_y))
 
     def is_hovered(self):
+        '''
+        Draws the button differently if it is hovered over
+        '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
                                                     self.y_position, self.width, self.height))
         screen.blit(self.button_image, (self.x_position +
@@ -112,5 +120,71 @@ class ButtonWithImage(Button):
             return False
 
     def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
         print("Clicked")
-        screen = pygame.display.set_mode((800, 600))
+
+
+class ButtonWithImageMinusBoardSize(ButtonWithImage):
+    '''
+    Special button class for picking the board size
+    '''
+
+    def __init__(self, x, y, width, height, button_color, button_image, padding_x=0, padding_y=0):
+        super().__init__(x, y, width, height, button_color,
+                         button_image, padding_x=0, padding_y=0)
+
+    def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
+        Board.decrement_board_size()
+
+
+class ButtonWithImagePlusBoardSize(ButtonWithImage):
+    '''
+    Special button class for picking the board size
+    '''
+
+    def __init__(self, x, y, width, height, button_color, button_image, padding_x=0, padding_y=0):
+        super().__init__(x, y, width, height, button_color,
+                         button_image, padding_x=0, padding_y=0)
+
+    def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
+        Board.increment_board_size()
+
+
+class ButtonWithImageMinusRowWin(ButtonWithImage):
+    '''
+    Special button class for picking the board size
+    '''
+
+    def __init__(self, x, y, width, height, button_color, button_image, padding_x=0, padding_y=0):
+        super().__init__(x, y, width, height, button_color,
+                         button_image, padding_x=0, padding_y=0)
+
+    def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
+        Board.decrement_row_win()
+
+
+class ButtonWithImagePlusRowWin(ButtonWithImage):
+    '''
+    Special button class for picking the board size
+    '''
+
+    def __init__(self, x, y, width, height, button_color, button_image, padding_x=0, padding_y=0):
+        super().__init__(x, y, width, height, button_color,
+                         button_image, padding_x=0, padding_y=0)
+
+    def is_clicked(self):
+        '''
+        Action after the button is clicked
+        '''
+        Board.increment_row_win()
