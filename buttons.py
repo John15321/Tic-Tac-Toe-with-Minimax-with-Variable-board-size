@@ -22,16 +22,15 @@ class Button:
 
 class ButtonWithText(Button):
     '''
-    A class for text that is contained inside buttons
+    A class for buttons with text inside them
     '''
 
-    def __init__(self, x, y, width, height, button_color, text, text_color=(0, 0, 0), padding_x=0, padding_y=0):
+    def __init__(self, x, y, width, height, button_color, text_color=(0, 0, 0), padding_x=0, padding_y=0):
         super().__init__(x, y,
                          width, height, button_color)
-        self.text = text
         self.text_color = text_color
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text_render = self.font.render(self.text, True, self.text_color)
+        self.text_render = self.font.render("", True, self.text_color)
         self.padding_x = padding_x
         self.padding_y = padding_y
 
@@ -44,9 +43,9 @@ class ButtonWithText(Button):
         screen.blit(self.font.render(txt_to_show, True, self.text_color), (self.x_position +
                                                                            self.padding_x, self.y_position + self.padding_y))
 
-    def is_hovered(self, txt_to_show):
+    def hovered(self, txt_to_show):
         '''
-        Draws the button with a different color as background when hovered over
+        Draws the button just like show_button() but  with a different color as background when hovered over
         '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
                                                     self.y_position, self.width, self.height))
@@ -63,7 +62,7 @@ class ButtonWithText(Button):
         else:
             return False
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
@@ -95,9 +94,9 @@ class ButtonWithImage(Button):
         screen.blit(self.button_image, (self.x_position +
                                         self.padding_x, self.y_position + self.padding_y))
 
-    def is_hovered(self):
+    def hovered(self):
         '''
-        Draws the button differently if it is hovered over
+        Draws the button just like show_button() but  with a different color as background when hovered over
         '''
         pygame.draw.rect(screen, self.hover_color, (self.x_position,
                                                     self.y_position, self.width, self.height))
@@ -112,7 +111,7 @@ class ButtonWithImage(Button):
 
     def is_over(self, mouse_pos):
         '''
-        Function return boolean of if the mouse while being clicked is over the particular button
+        Function returns a boolean if the mouse while being clicked is over the particular button
         '''
         if mouse_pos[0] > self.x_position and mouse_pos[0] < self.x_position + self.width:
             if mouse_pos[1] > self.y_position and mouse_pos[1] < self.y_position + self.height:
@@ -120,7 +119,7 @@ class ButtonWithImage(Button):
         else:
             return False
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
@@ -136,7 +135,7 @@ class ButtonWithImageMinusBoardSize(ButtonWithImage):
         super().__init__(x, y, width, height, button_color,
                          button_image, padding_x=0, padding_y=0)
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
@@ -152,7 +151,7 @@ class ButtonWithImagePlusBoardSize(ButtonWithImage):
         super().__init__(x, y, width, height, button_color,
                          button_image, padding_x=0, padding_y=0)
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
@@ -168,7 +167,7 @@ class ButtonWithImageMinusRowWin(ButtonWithImage):
         super().__init__(x, y, width, height, button_color,
                          button_image, padding_x=0, padding_y=0)
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
@@ -184,7 +183,7 @@ class ButtonWithImagePlusRowWin(ButtonWithImage):
         super().__init__(x, y, width, height, button_color,
                          button_image, padding_x=0, padding_y=0)
 
-    def is_clicked(self):
+    def clicked(self):
         '''
         Action after the button is clicked
         '''
