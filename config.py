@@ -20,6 +20,3 @@ screen_width = 800
 screen_height = 600
 screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size)
-
-max_board_size = 8
-min_board_size = 3

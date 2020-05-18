@@ -1,5 +1,10 @@
+'''
+Python module with Board class. There is going to be only one board therefore it operattes on
+class variables.
+'''
 import pygame
 from config import *
+
 
 class Board:
     '''
@@ -7,6 +12,8 @@ class Board:
     rows required to "paint" in order to win
     '''
 
+    max_board_size = 8
+    min_board_size = 3
     board_size = 3
     row_win = 3
 
@@ -48,7 +55,7 @@ class Board:
         Increment board_size value by 1
         It is a @classmethod, meaning you increment the class variable value
         '''
-        if cls.board_size < max_board_size:
+        if cls.board_size < cls.max_board_size:
             cls.board_size += 1
             cls.increment_row_win()
 
@@ -67,7 +74,7 @@ class Board:
         Decrement board_size value by 1
         It is a @classmethod, meaning you decrement the class variable value
         '''
-        if cls.board_size > min_board_size:
+        if cls.board_size > cls.min_board_size:
             cls.board_size -= 1
             if cls.row_win - 1 == cls.board_size:
                 cls.decrement_row_win()
@@ -78,5 +85,5 @@ class Board:
         Decrement row_win value by 1
         It is a @classmethod, meaning you decrement the class variable value
         '''
-        if cls.row_win > min_board_size:
+        if cls.row_win > cls.min_board_size:
             cls.row_win -= 1

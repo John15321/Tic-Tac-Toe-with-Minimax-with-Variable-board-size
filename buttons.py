@@ -1,5 +1,5 @@
 '''
-Module responsible for implementing button mechanics using pygame
+Module responsible for implementing button mechanics using pygame.
 '''
 import pygame
 from config import *
