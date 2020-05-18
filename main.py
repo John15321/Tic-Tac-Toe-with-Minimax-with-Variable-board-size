@@ -2,6 +2,7 @@
 import pygame
 from config import *
 from buttons import *
+from board import *
 
 
 def game_main_menu():
