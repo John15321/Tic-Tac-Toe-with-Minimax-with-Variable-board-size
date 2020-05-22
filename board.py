@@ -160,7 +160,8 @@ class Setup_board(Tile):
 
     def __init__(self):
 
-        self.fields = [0] * (Board.get_board_size()**2)
+        # self.fields = [0] * (Board.get_board_size()**2)
+        self.fields = [0 for i in range(0, Board.get_board_size()**2)]
         self.tile_size = (int((screen_width / Board.get_board_size()) * 0.8),
                           int((screen_height / Board.get_board_size()) * 0.8))
         offset = (int((screen_width / Board.get_board_size())) - self.tile_size[0],
