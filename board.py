@@ -5,6 +5,7 @@ class variables.
 import pygame
 from config import *
 
+
 class Board:
     '''
     This class describes properties of the game board like its size and the number of
@@ -88,6 +89,7 @@ class Board:
         if cls.row_win > cls.min_board_size:
             cls.row_win -= 1
 
+
 class Tile:
     '''
     A class for text that is contained inside buttons
@@ -101,10 +103,10 @@ class Tile:
         self.tile_color = tile_color
         self.hover_color = hover_color_for_buttons
         self.tile_image = pygame.image.load(tile_image)
-        self.tile_image = pygame.transform.scale(self.tile_image, (self.width, self.height))
+        self.tile_image = pygame.transform.scale(
+            self.tile_image, (self.width, self.height))
         self.padding_x = padding_x
         self.padding_y = padding_y
-
 
     def show_tile(self, hover_color=(-1, -1, -1)):
         '''
@@ -148,20 +150,21 @@ class Tile:
         '''
         pass
 
+
 class Setup_board(Tile):
     '''
     This class sets up game board depending on number of tiles
     '''
     fields = []
-    tile_size = (0,0)
+    tile_size = (0, 0)
 
     def __init__(self):
 
         self.fields = [0] * (Board.get_board_size()**2)
-        self.tile_size = (int((screen_width / Board.get_board_size()) * 0.8), int((screen_height / Board.get_board_size()) * 0.8))
+        self.tile_size = (int((screen_width / Board.get_board_size()) * 0.8),
+                          int((screen_height / Board.get_board_size()) * 0.8))
         offset = (int((screen_width / Board.get_board_size())) - self.tile_size[0],
                   int((screen_height / Board.get_board_size())) - self.tile_size[1])
-
 
         i = 0
 
@@ -171,14 +174,18 @@ class Setup_board(Tile):
                     tile_pos_x = int(offset[0] / 2)
                     tile_pos_y = int(offset[1] / 2)
                 elif y == 0 and x != 0:
-                    tile_pos_x = self.tile_size[0] * x + int(offset[0] / 2) + offset[0] * x
+                    tile_pos_x = self.tile_size[0] * x + \
+                        int(offset[0] / 2) + offset[0] * x
                     tile_pos_y = int(offset[1] / 2)
                 elif y != 0 and x == 0:
                     tile_pos_x = int(offset[0] / 2)
-                    tile_pos_y = self.tile_size[1] * y + int(offset[1] / 2) + offset[1] * y
+                    tile_pos_y = self.tile_size[1] * y + \
+                        int(offset[1] / 2) + offset[1] * y
                 else:
-                    tile_pos_x = self.tile_size[0] * x + int(offset[0] / 2) + offset[0] * x
-                    tile_pos_y = self.tile_size[1] * y + int(offset[1] / 2) + offset[1] * y
+                    tile_pos_x = self.tile_size[0] * x + \
+                        int(offset[0] / 2) + offset[0] * x
+                    tile_pos_y = self.tile_size[1] * y + \
+                        int(offset[1] / 2) + offset[1] * y
 
                 self.fields[i] = Tile(tile_pos_x, tile_pos_y, self.tile_size[0], self.tile_size[1],
                                       background_color_for_buttons, "./Resources/cross_icon_100px.png")

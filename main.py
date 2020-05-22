@@ -3,6 +3,7 @@ import pygame
 from config import *
 from buttons import *
 
+
 def game_main_menu():
     '''
     Main Menu function for choosing boards size and games row win
@@ -26,7 +27,8 @@ def game_main_menu():
     button_row_size_plus = ButtonWithImagePlusRowWin(
         450, 678, 64, 64, background_color_for_buttons, "./Resources/plus_icon.png")
 
-    start = ButtonWithText(275, 350, 250, 100, background_color_for_buttons, (0, 0, 0), 75, 35)
+    start = ButtonWithText(
+        275, 350, 250, 100, background_color_for_buttons, (0, 0, 0), 75, 35)
 
     buttons = [button_board_size_minus, button_board_size_plus,
                button_row_size_minus, button_row_size_plus]
@@ -44,7 +46,6 @@ def game_main_menu():
                         each.clicked()
                 if start.is_over(mouse_position):
                     main_menu = False
-
 
         # Checking if buttons are hovered over
         # and if yes then change background button color
@@ -86,8 +87,8 @@ def main_game_loop():
     board = Setup_board()
     board.draw_board()
 
+
 if __name__ == "__main__":
 
     game_main_menu()
     main_game_loop()
-
