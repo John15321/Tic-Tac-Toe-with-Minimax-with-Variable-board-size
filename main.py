@@ -2,6 +2,7 @@
 import pygame
 from config import *
 from buttons import *
+from board import *
 
 
 def game_main_menu():
@@ -9,6 +10,7 @@ def game_main_menu():
     Main Menu function for choosing boards size and games row win
     '''
     main_menu = True
+
     button_board_size_show = ButtonWithText(350, 557, 100, 64,
                                             background_color_for_buttons, (0, 0, 0), 32, 16)
 
@@ -30,12 +32,13 @@ def game_main_menu():
     start = ButtonWithText(
         275, 350, 250, 100, background_color_for_buttons, (0, 0, 0), 75, 35)
 
+
     buttons = [button_board_size_minus, button_board_size_plus,
                button_row_size_minus, button_row_size_plus]
 
     while main_menu:
         screen.fill(screen_color)
-        # for loop for catching evvents for PyGame
+        # for loop for catching events for PyGame
         mouse_position = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,6 +47,7 @@ def game_main_menu():
                 for each in buttons:
                     if each.is_over(mouse_position):
                         each.clicked()
+
                 if start.is_over(mouse_position):
                     main_menu = False
 
@@ -54,6 +58,7 @@ def game_main_menu():
                 each.hovered()
             else:
                 each.show_button()
+
 
         if start.is_over(mouse_position):
             start.hovered("START")
@@ -72,6 +77,7 @@ def game_main_menu():
         else:
             button_win_size_show.show_button(str(Board.get_row_win()))
 
+
         if start.is_over(mouse_position):
             start.hovered("START")
         else:
@@ -84,6 +90,7 @@ def main_game_loop():
     '''
     Main Game loop. Function where the player is going to play against teh Minimax algorithm
     '''
+
     board = Setup_board()
     board.draw_board()
 
@@ -92,3 +99,4 @@ if __name__ == "__main__":
 
     game_main_menu()
     main_game_loop()
+

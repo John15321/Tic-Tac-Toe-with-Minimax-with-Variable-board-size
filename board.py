@@ -89,7 +89,6 @@ class Board:
         if cls.row_win > cls.min_board_size:
             cls.row_win -= 1
 
-
 class Tile:
     '''
     A class for text that is contained inside buttons
