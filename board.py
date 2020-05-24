@@ -90,9 +90,10 @@ class Board:
         if cls.row_win > cls.min_board_size:
             cls.row_win -= 1
 
+
 class Tile:
     '''
-    A class for text that is contained inside buttons
+    A class for tiles on game board
     '''
 
     def __init__(self, x, y, width, height, tile_color, tile_image, padding_x=0, padding_y=0):
@@ -103,10 +104,14 @@ class Tile:
         self.tile_color = tile_color
         self.hover_color = hover_color_for_buttons
         self.tile_image = pygame.image.load(tile_image)
-        self.tile_image = pygame.transform.scale(
-            self.tile_image, (self.width, self.height))
+        self.tile_image = pygame.transform.scale(self.tile_image,
+                                                 (self.width, self.height))
         self.padding_x = padding_x
         self.padding_y = padding_y
+
+    def get_position(self):
+
+        return (self.x_position, self.y_position)
 
     def show_tile(self, hover_color=(-1, -1, -1)):
         '''
@@ -151,7 +156,53 @@ class Tile:
         pass
 
 
-class Setup_board(Tile):
+class Tile_with_symbol:
+    '''
+    A class for tiles with placed symbols
+    '''
+
+    def __init__(self, x, y, width, height, tile_color, symbol: str, padding_x=0, padding_y=0):
+        self.x_position = x
+        self.y_position = y
+        self.width = width
+        self.height = height
+        self.tile_color = tile_color
+        self.padding_x = padding_x
+        self.padding_y = padding_y
+
+        if symbol == "cross":
+            self.tile_image = pygame.image.load(
+                "./Resources/cross_icon_100px.png")
+            self.tile_image = pygame.transform.scale(self.tile_image,
+                                                     (self.width, self.height))
+        elif symbol == "circle":
+            self.tile_image = pygame.image.load(
+                "./Resources/circle_icon_100px.png")
+            self.tile_image = pygame.transform.scale(self.tile_image,
+                                                     (self.width, self.height))
+        else:
+            print("Incorrect symbol")
+
+    def show_tile(self, hover_color=(-1, -1, -1)):
+        '''
+        Function for showing a given button with its set positions and values, etc.
+        '''
+        pygame.draw.rect(screen, self.tile_color, (self.x_position,
+                                                   self.y_position, self.width, self.height))
+        screen.blit(self.tile_image, (self.x_position + self.padding_x,
+                                      self.y_position + self.padding_y))
+
+    def hovered(self):
+        pass
+
+    def is_over(self, mouse_pos=(0, 0)):
+        pass
+
+    def clicked(self):
+        pass
+
+
+class Setup_board:
     '''
     This class sets up game board depending on number of tiles
     '''
@@ -206,10 +257,12 @@ class Setup_board(Tile):
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    for each in self.fields:
-                        if each.is_over(mouse_position):
-                            each.clicked()
-
+                    for i in range(len(self.fields)):
+                        if self.fields[i].is_over(mouse_position):
+                            self.fields[i].clicked()
+                            pos = self.fields[i].get_position()
+                            self.fields[i] = Tile_with_symbol(pos[0], pos[1], self.tile_size[0],
+                                                              self.tile_size[1], background_color_for_buttons, "cross")
 
             # Checking if buttons are hovered over
             # and if yes then change background button color
