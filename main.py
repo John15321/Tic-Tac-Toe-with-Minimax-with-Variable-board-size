@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import pygame
+import sys
 from config import *
 from buttons import *
 from board import *
@@ -42,7 +43,8 @@ def game_main_menu():
         mouse_position = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                main_menu = False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for each in buttons:
                     if each.is_over(mouse_position):

@@ -3,6 +3,7 @@ Python module with Board class. There is going to be only one board therefore it
 class variables.
 '''
 import pygame
+import sys
 from config import *
 
 
@@ -202,11 +203,13 @@ class Setup_board(Tile):
             mouse_position = pygame.mouse.get_pos()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    game = False
+                    pygame.quit()
+                    sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for each in self.fields:
                         if each.is_over(mouse_position):
                             each.clicked()
+
 
             # Checking if buttons are hovered over
             # and if yes then change background button color
