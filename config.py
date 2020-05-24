@@ -1,5 +1,5 @@
 '''
-Module responsible for  configuring screen graphics like color, width, height etc.
+Module responsible for configuring screen graphics like color, width, height etc.
 '''
 import pygame
 
@@ -17,6 +17,6 @@ background_color_for_buttons = (130, 196, 195)
 # Creating the screen
 # screen size (has to be a tuple: width x height)
 screen_width = 800
-screen_height = 600
+screen_height = 800
 screen_size = (screen_width, screen_height)
 screen = pygame.display.set_mode(screen_size)
