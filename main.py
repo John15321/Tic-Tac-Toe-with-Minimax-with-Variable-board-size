@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import pygame
 import sys
+import pygame
 from config import *
 from buttons import *
 from board import *
@@ -33,7 +33,6 @@ def game_main_menu():
     start = ButtonWithText(
         275, 350, 250, 100, background_color_for_buttons, (0, 0, 0), 75, 35)
 
-
     buttons = [button_board_size_minus, button_board_size_plus,
                button_row_size_minus, button_row_size_plus]
 
@@ -61,7 +60,6 @@ def game_main_menu():
             else:
                 each.show_button()
 
-
         if start.is_over(mouse_position):
             start.hovered("START")
         else:
@@ -78,7 +76,6 @@ def game_main_menu():
             button_win_size_show.hovered(str(Board.get_row_win()))
         else:
             button_win_size_show.show_button(str(Board.get_row_win()))
-
 
         if start.is_over(mouse_position):
             start.hovered("START")
@@ -101,4 +98,3 @@ if __name__ == "__main__":
 
     game_main_menu()
     main_game_loop()
-

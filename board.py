@@ -90,6 +90,7 @@ class Board:
         if cls.row_win > cls.min_board_size:
             cls.row_win -= 1
 
+
 class Tile:
     '''
     A class for tiles on game board
@@ -154,12 +155,13 @@ class Tile:
         '''
         pass
 
+
 class Tile_with_symbol:
     '''
     A class for tiles with placed symbols
     '''
 
-    def __init__(self, x, y, width, height, tile_color, symbol:str, padding_x=0, padding_y=0):
+    def __init__(self, x, y, width, height, tile_color, symbol: str, padding_x=0, padding_y=0):
         self.x_position = x
         self.y_position = y
         self.width = width
@@ -169,11 +171,13 @@ class Tile_with_symbol:
         self.padding_y = padding_y
 
         if symbol == "cross":
-            self.tile_image = pygame.image.load("./Resources/cross_icon_100px.png")
+            self.tile_image = pygame.image.load(
+                "./Resources/cross_icon_100px.png")
             self.tile_image = pygame.transform.scale(self.tile_image,
                                                      (self.width, self.height))
         elif symbol == "circle":
-            self.tile_image = pygame.image.load("./Resources/circle_icon_100px.png")
+            self.tile_image = pygame.image.load(
+                "./Resources/circle_icon_100px.png")
             self.tile_image = pygame.transform.scale(self.tile_image,
                                                      (self.width, self.height))
         else:
@@ -187,14 +191,16 @@ class Tile_with_symbol:
                                                    self.y_position, self.width, self.height))
         screen.blit(self.tile_image, (self.x_position + self.padding_x,
                                       self.y_position + self.padding_y))
+
     def hovered(self):
         pass
 
-    def is_over(self, mouse_pos = (0, 0)):
+    def is_over(self, mouse_pos=(0, 0)):
         pass
 
     def clicked(self):
         pass
+
 
 class Setup_board:
     '''
@@ -256,7 +262,7 @@ class Setup_board:
                             self.fields[i].clicked()
                             pos = self.fields[i].get_position()
                             self.fields[i] = Tile_with_symbol(pos[0], pos[1], self.tile_size[0],
-                                                self.tile_size[1], background_color_for_buttons,"cross")
+                                                              self.tile_size[1], background_color_for_buttons, "cross")
 
             # Checking if buttons are hovered over
             # and if yes then change background button color
