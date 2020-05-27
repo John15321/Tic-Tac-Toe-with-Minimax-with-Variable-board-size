@@ -90,12 +90,12 @@ class SetupBoard(GameMechanics):
                                 self.signs[y][x] = 'x'
                                 self.update_board()
                                 self.print_board_to_console()
-                                self.minimax()
+                                self.check_win('x')
+                                # self.minimax()
                                 self.update_board()
-            '''
-            TODO:
-            ruch AI
-            '''
+                                self.check_win('o')
+
+            # self.signs = self.best_move(self.signs)
             # Checking if buttons are hovered over
             # and if yes then change background button color
             for each_sublist in self.fields:
