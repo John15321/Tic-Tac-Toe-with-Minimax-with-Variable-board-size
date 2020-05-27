@@ -47,6 +47,33 @@ class SetupBoard(GameMechanics):
                 self.fields[x][y] = Tile(tile_pos_x, tile_pos_y, self.tile_size[0], self.tile_size[1],
                                          background_color_for_buttons, "./Resources/cross_icon_100px.png")
 
+    def display_message(self, size: int, message: str, color: tuple, position: tuple):
+        """
+        Display message of desired size and color at desired position.
+        """
+        text = pygame.font.Font(None, size)
+        text_surf = text.render(message, True, color)
+        text_rect = text_surf.get_rect()
+        text_rect.center = position
+        screen.blit(text_surf, text_rect)
+
+    def end_screen(self, result):
+        '''
+        Screen that shows after the game ends.
+        '''
+        end_screen = True
+        while end_screen:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    end_screen = False
+                    pygame.time.delay(200)
+
+            self.display_message(255, result, (0,0,0), (400, 400))
+            self.display_message(100, 'Click to continue...', (0,0,0), (400, 500))
+
     def update_board(self):
         '''
         Function reponsible for updating fields of the board
@@ -85,15 +112,24 @@ class SetupBoard(GameMechanics):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for x in range(Board.get_board_size()):
                         for y in range(Board.get_board_size()):
-                            if self.fields[x][y].is_over(mouse_position):
+                            if self.fields[x][y].is_over(mouse_position) and not self.check_if_game_finish():
                                 self.fields[x][y].clicked()
                                 self.signs[y][x] = 'x'
                                 self.update_board()
                                 self.print_board_to_console()
-                                self.check_win('x')
-                                # self.minimax()
-                                self.update_board()
-                                self.check_win('o')
+                                if self.check_win('x'):
+                                    self.end_screen("X WINS!")
+                                elif self.check_if_game_finish():
+                                    self.end_screen("TIE!")
+                                else:
+                                    self.best_move()
+                                    self.update_board()
+                                    if self.check_win('o'):
+                                        self.endscreen("O WINS!")
+                                    elif self.check_if_game_finish():
+                                        self.end_screen("TIE!")
+                                    else:
+                                        print("I'm retarded")
 
             # self.signs = self.best_move(self.signs)
             # Checking if buttons are hovered over
