@@ -98,3 +98,17 @@ if __name__ == "__main__":
 
     game_main_menu()
     main_game_loop()
+
+
+
+
+
+
+
+'''
+class Game:
+
+def minima(kurw):
+    asdasddasdaw
+
+'''

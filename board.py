@@ -5,7 +5,7 @@ class variables.
 import pygame
 import sys
 from config import *
-
+from game_mechanics import *
 
 class Board:
     '''
@@ -202,15 +202,15 @@ class Tile_with_symbol:
         pass
 
 
-class Setup_board:
+class Setup_board(Game_Mechanics):
     '''
     This class sets up game board depending on number of tiles
     '''
-    fields = []
-    tile_size = (0, 0)
 
     def __init__(self):
-
+        super().__init__(Board.get_board_size())
+        self.fields = []
+        self.tile_size = (0, 0)
         # self.fields = [0] * (Board.get_board_size()**2)
         self.fields = [0 for i in range(0, Board.get_board_size()**2)]
         self.tile_size = (int((screen_width / Board.get_board_size()) * 0.8),
@@ -263,6 +263,10 @@ class Setup_board:
                             pos = self.fields[i].get_position()
                             self.fields[i] = Tile_with_symbol(pos[0], pos[1], self.tile_size[0],
                                                               self.tile_size[1], background_color_for_buttons, "cross")
+                            self.signs[i] = 1
+                            '''
+                                TODO: 4. aktualizacja planszy
+                            '''
 
             # Checking if buttons are hovered over
             # and if yes then change background button color
@@ -271,5 +275,7 @@ class Setup_board:
                     each.hovered()
                 else:
                     each.show_tile()
+
+            print(self.signs)
 
             pygame.display.update()
