@@ -66,10 +66,10 @@ class SetupBoard(GameMechanics):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    end_screen = False
-                    pygame.time.delay(200)
+                    pygame.quit()
+                    sys.exit()
 
             self.display_message(255, result, (0,0,0), (400, 400))
             self.display_message(100, 'Click to continue...', (0,0,0), (400, 500))
@@ -125,11 +125,9 @@ class SetupBoard(GameMechanics):
                                     self.best_move()
                                     self.update_board()
                                     if self.check_win('o'):
-                                        self.endscreen("O WINS!")
+                                        self.end_screen("O WINS!")
                                     elif self.check_if_game_finish():
                                         self.end_screen("TIE!")
-                                    else:
-                                        print("I'm retarded")
 
             # self.signs = self.best_move(self.signs)
             # Checking if buttons are hovered over

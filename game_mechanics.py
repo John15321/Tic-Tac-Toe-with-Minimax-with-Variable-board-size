@@ -121,11 +121,6 @@ class HandleWin():
         '''
         result = self.check_horizontal(symbol) or self.check_vertical(
             symbol) or self.check_diagonal(symbol)
-        # if result:
-            # print(symbol + " WINS!")
-            # if event.type == pygame.K_SPACE:
-            #     pygame.quit()
-            #     sys.exit()
 
         return result
 
@@ -169,7 +164,7 @@ class GameMechanics(HandleWin):
                         self.signs[i][j] = 'o'
                         score = self.minimax(False)
                         self.signs[i][j] = '-'
-                        bestScore = max(score, best_score)
+                        best_score = max(score, best_score)
             return best_score
         else:
             best_score = 99999999
@@ -181,11 +176,6 @@ class GameMechanics(HandleWin):
                         self.signs[i][j] = '-'
                         best_score = min(score, best_score)
             return best_score
-
-
-
-
-
 
 
     def best_move(self):
