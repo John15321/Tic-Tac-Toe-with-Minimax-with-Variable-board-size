@@ -4,15 +4,18 @@ for handling game logic.
 '''
 
 
-class Game_Mechanics():
+class GameMechanics():
 
     def __init__(self, board_size):
 
-        self.signs = [[-1 for j in range(0, board_size)]
+        self.signs = [['-' for j in range(0, board_size)]
                       for i in range(0, board_size)]
+
+    def 
 
     def minimax(self):
         pass
+
 
 '''
 TODO:
@@ -22,7 +25,4 @@ TODO:
 4. Aktualizacja planszy
 5. Patrzymy czy jest wygrana
 6. Graczc robi ruch i sie powtarza
-
-
-
 '''
