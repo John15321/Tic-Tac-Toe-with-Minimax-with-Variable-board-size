@@ -183,7 +183,7 @@ class TileWithSymbol:
 
     def show_tile(self, hover_color=(-1, -1, -1)):
         '''
-        Function for showing a given button with its set positions and values, etc.
+        Function for showing a given button with its set positions and values, etc
         '''
         pygame.draw.rect(screen, self.tile_color, (self.x_position,
                                                    self.y_position, self.width, self.height))
