@@ -71,12 +71,13 @@ class SetupBoard(GameMechanics):
                     pygame.quit()
                     sys.exit()
 
-            self.display_message(255, result, (0,0,0), (400, 400))
-            self.display_message(100, 'Click to continue...', (0,0,0), (400, 500))
+            self.display_message(255, result, (0, 0, 0), (400, 400))
+            self.display_message(
+                100, 'Click to continue...', (0, 0, 0), (400, 500))
 
     def update_board(self):
         '''
-        Function reponsible for updating fields of the board
+        Function reponsible for updating fields of the board each "frame"
         '''
         for y in range(0, Board.get_board_size()):
             for x in range(0, Board.get_board_size()):
@@ -118,6 +119,7 @@ class SetupBoard(GameMechanics):
                                 self.update_board()
                                 self.print_board_to_console()
                                 if self.check_win('x'):
+                                    print("X Wins!")
                                     self.end_screen("X WINS!")
                                 elif self.check_if_game_finish():
                                     self.end_screen("TIE!")
@@ -126,11 +128,11 @@ class SetupBoard(GameMechanics):
                                     self.update_board()
                                     self.print_board_to_console()
                                     if self.check_win('o'):
+                                        print("O Wins!")
                                         self.end_screen("O WINS!")
                                     elif self.check_if_game_finish():
+                                        print("Tie!")
                                         self.end_screen("TIE!")
-
-            # self.signs = self.best_move(self.signs)
             # Checking if buttons are hovered over
             # and if yes then change background button color
             for each_sublist in self.fields:

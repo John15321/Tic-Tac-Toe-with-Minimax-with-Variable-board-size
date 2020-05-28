@@ -5,6 +5,7 @@ for handling game logic.
 import pygame
 from board_elements import *
 
+
 class HandleWin():
     '''
     A simple class that chekcs is there is a winner on the current board
@@ -23,13 +24,13 @@ class HandleWin():
         for i in range(Board.get_board_size()):
             self.line = 0
             for j in range(Board.get_board_size()):
-                if (self.signs[i][j] == symbol):
+                if self.signs[i][j] == symbol:
                     self.line += 1
-                elif(self.signs[i][j] != symbol):
+                elif self.signs[i][j] != symbol:
                     self.line = 0
                 elif self.line == 0 and ((Board.get_board_size() - j) < Board.get_row_win()):
                     break
-                if (self.line >= Board.get_row_win()):
+                if self.line >= Board.get_row_win():
                     return True
 
     def check_vertical(self, symbol):
@@ -39,13 +40,13 @@ class HandleWin():
         for j in range(Board.get_board_size()):
             self.line = 0
             for i in range(Board.get_board_size()):
-                if (self.signs[i][j] == symbol):
+                if self.signs[i][j] == symbol:
                     self.line += 1
-                elif(self.signs[i][j] != symbol):
+                elif self.signs[i][j] != symbol:
                     self.line = 0
                 elif (self.line == 0) and ((Board.get_board_size() - i) < Board.get_row_win()):
                     break
-                if (self.line >= Board.get_row_win()):
+                if self.line >= Board.get_row_win():
                     return True
 
     def check_diagonal(self, symbol):
@@ -123,14 +124,20 @@ class HandleWin():
         return result
 
     def who_won(self):
+        '''
+        Returns who won the game
+        '''
         if self.check_win('x'):
             return 'x'
         elif self.check_win('o'):
             return 'o'
-        elif self.check_if_game_finish() and (self.check_win('x')==False) and (self.check_win('o')==False):
+        elif self.check_if_game_finish() and (self.check_win('x') == False) and (self.check_win('o') == False):
             return 't'
 
     def calculate_score(self):
+        '''
+        Calcualtes score
+        '''
         size = Board.get_board_size()
         score = 0
         for i in range(size):
@@ -163,19 +170,19 @@ class HandleWin():
             elif self.signs[i][i] != '-':
                 temp = 0
                 break
-        
+
         if temp != 0:
             score += 10**temp
 
         temp = 0
-        
+
         for i in range(1, size):
             if self.signs[size - i][i - 1] == 'o':
                 temp += 1
             if self.signs[size - i][i - 1] != 'o' and self.signs[size - 1][i - 1] != '-':
                 temp = 0
                 break
-        
+
         if temp != 0:
             score += 10 ** temp
         return score
@@ -192,70 +199,11 @@ class GameMechanics(HandleWin):
         super().__init__(self.signs)
         self.inf = 900000000
 
-    # def minimax(self, depth, is_maximizing):
-    #     '''
-    #     Minimax algorithm (recursive), returns the best score from a given
-    #     recursion depth
-    #     '''
-    #     result = self.who_won()
-    #     if (result == 'x'):
-    #         return -1
-    #     elif result == 'o':
-    #         return 1
-    #     elif result == 't':
-    #         return 0
-
-    #     if (is_maximizing):
-    #         best_score = -9999999
-    #         for i in range(0, Board.get_board_size()):
-    #             for j in range(0, Board.get_board_size()):
-    #                 if self.signs[i][j] == '-':
-    #                     self.signs[i][j] = 'o'
-    #                     score = self.minimax(depth + 1, False)
-    #                     self.signs[i][j] = '-'
-    #                     best_score = max(score, best_score)
-    #         return best_score
-    #     else:
-    #         best_score = 9999999
-    #         for i in range(0, Board.get_board_size()):
-    #             for j in range(0, Board.get_board_size()):
-    #                 if self.signs[i][j] == '-':
-    #                     self.signs[i][j] = 'x'
-    #                     score = self.minimax(depth + 1, True)
-    #                     self.signs[i][j] = '-'
-    #                     best_score = min(score, best_score)
-    #         return best_score
-
-    # def best_move(self):
-    #     '''
-    #     This function calls minimax (which then calls itself recursivley) and returns the best
-    #     move that the AI should pick
-    #     '''
-    #     best_score = -9999999
-    #     # Will hold [x, y]
-    #     new_best_move = [0,0]
-    #     # for each move in board:
-    #     for y in range(0, Board.get_board_size()):
-    #         for x in range(0, Board.get_board_size()):
-    #             if self.signs[y][x] == '-':
-    #                 self.signs[y][x] = 'o'
-    #                 score = self.minimax(0, False)
-    #                 self.signs[y][x] = '-'
-    #                 if score > best_score:
-    #                     best_score = score
-    #                     new_best_move = [y, x]
-
-    #     self.signs[new_best_move[0]][new_best_move[1]] = 'o'
-
-    #     #     if current move is better than bestMove
-    #     #     bestMove = current move
-    #     # Returns the best move
-
-
-
     def Minimax(self, symbol, depth, a, b):
-
-        if self.check_win( symbol ):
+        '''
+        The main Minimax algorithm
+        '''
+        if self.check_win(symbol):
             if symbol == 'o':
                 return 10**8
             else:
@@ -266,7 +214,7 @@ class GameMechanics(HandleWin):
                 return self.calculate_score()
             else:
                 return (-1)*self.calculate_score()
-        
+
         if symbol == 'x':
             symbol = 'o'
             best_score = (-1)*self.inf
@@ -287,7 +235,7 @@ class GameMechanics(HandleWin):
                         self.signs[i][j] = '-'
                         if a >= b:
                             return best_score
-                    
+
                     else:
                         self.signs[i][j] = symbol
                         m = self.Minimax(symbol, depth - 1, a, b)
@@ -302,6 +250,9 @@ class GameMechanics(HandleWin):
         return best_score
 
     def best_move(self):
+        '''
+        Returns the best move that the AI should take!
+        '''
         best_score = (-1)*self.inf
         for i in range(Board.get_board_size()):
             for j in range(Board.get_board_size()):
@@ -315,76 +266,3 @@ class GameMechanics(HandleWin):
                         mov_j = j
 
         self.signs[mov_i][mov_j] = 'o'
-
-
-
-
-
-'''
-TODO:
-1. Przekazywac Game_Mechanics stan gry i go ogolnie updatowac
-2. Na postawie Game_Mechanics(minimax) zrobic prediction gdzie ma byc ruch O
-3. O musi zrobic swoj ruch
-4. Aktualizacja planszy
-5. Patrzymy czy jest wygrana
-6. Graczc robi ruch i sie powtarza
-'''
-
-
-'''
-
-let scores = 
-{
-  X: 10,
-  O: -10,
-  tie: 0
-};
-
-function minimax(board, depth, isMaximizing) 
-{
-  let result = checkWinner();
-  if (result !== null) 
-  {
-    return scores[result];
-  }
-
-  if (isMaximizing) 
-  {
-    let bestScore = -Infinity;
-    for (let i = 0; i < Board.get_board_size(); i++) 
-    {
-      for (let j = 0; j < Board.get_board_size(); j++) 
-      {
-        // Is the spot available?
-        if (board[i][j] == '') 
-        {
-          board[i][j] = ai;
-          let score = minimax(board, depth + 1, false);
-          board[i][j] = '';
-          bestScore = max(score, bestScore);
-        }
-      }
-    }
-    return bestScore;
-  } else 
-  {
-    let bestScore = Infinity;
-    for (let i = 0; i < Board.get_board_size(); i++) 
-    {
-      for (let j = 0; j < Board.get_board_size(); j++) 
-      {
-        // Is the spot available?
-        if (board[i][j] == '') 
-        {
-          board[i][j] = human;
-          let score = minimax(board, depth + 1, true);
-          board[i][j] = '';
-          bestScore = min(score, bestScore);
-        }
-      }
-    }
-    return bestScore;
-  }
-}
-
-'''
