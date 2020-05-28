@@ -124,6 +124,7 @@ class SetupBoard(GameMechanics):
                                 else:
                                     self.best_move()
                                     self.update_board()
+                                    self.print_board_to_console()
                                     if self.check_win('o'):
                                         self.end_screen("O WINS!")
                                     elif self.check_if_game_finish():
