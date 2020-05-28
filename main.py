@@ -90,7 +90,7 @@ def main_game_loop():
     Main Game loop. Function where the player is going to play against teh Minimax algorithm
     '''
 
-    board = Setup_board()
+    board = SetupBoard()
     board.draw_board()
 
 
@@ -100,15 +100,9 @@ if __name__ == "__main__":
     main_game_loop()
 
 
-
-
-
-
-
 '''
 class Game:
 
 def minima(kurw):
     asdasddasdaw
-
 '''
