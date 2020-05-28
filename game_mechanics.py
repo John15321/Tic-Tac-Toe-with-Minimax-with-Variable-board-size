@@ -198,6 +198,7 @@ class GameMechanics(HandleWin):
                       for i in range(0, board_size)]
         super().__init__(self.signs)
         self.inf = 900000000
+        self.max_depth = 5  # maximum recusion depth level, balances efficiency and AI predictions
 
     def Minimax(self, symbol, depth, a, b):
         '''
@@ -258,7 +259,7 @@ class GameMechanics(HandleWin):
             for j in range(Board.get_board_size()):
                 if self.signs[i][j] == '-':
                     self.signs[i][j] = 'o'
-                    m = self.Minimax('o', 6, (-1) * self.inf, self.inf)
+                    m = self.Minimax('o', self.max_depth, (-1) * self.inf, self.inf)
                     self.signs[i][j] = '-'
                     if m > best_score:
                         best_score = m

@@ -71,9 +71,17 @@ class SetupBoard(GameMechanics):
                     pygame.quit()
                     sys.exit()
 
-            self.display_message(255, result, (0, 0, 0), (400, 400))
+            if result == 'x':
+                mess = "X Wins"
+            elif result == 'o':
+                mess = "O Wins"
+            elif result == '-':
+                mess = "Tie"
+
+            self.display_message(255, mess, (0, 0, 0), (400, 400))
             self.display_message(
                 100, 'Click to continue...', (0, 0, 0), (400, 500))
+            pygame.display.update()
 
     def update_board(self):
         '''
@@ -102,6 +110,7 @@ class SetupBoard(GameMechanics):
         This function draws game board
         '''
         game = True
+
         while game:
             screen.fill(screen_color)
             # for loop for catching events for PyGame
@@ -120,19 +129,20 @@ class SetupBoard(GameMechanics):
                                 self.print_board_to_console()
                                 if self.check_win('x'):
                                     print("X Wins!")
-                                    self.end_screen("X WINS!")
+                                    self.end_screen('x')
                                 elif self.check_if_game_finish():
-                                    self.end_screen("TIE!")
+                                    print("Tie!")
+                                    self.end_screen('-')
                                 else:
                                     self.best_move()
                                     self.update_board()
                                     self.print_board_to_console()
                                     if self.check_win('o'):
                                         print("O Wins!")
-                                        self.end_screen("O WINS!")
+                                        self.end_screen('o')
                                     elif self.check_if_game_finish():
                                         print("Tie!")
-                                        self.end_screen("TIE!")
+                                        self.end_screen('-')
             # Checking if buttons are hovered over
             # and if yes then change background button color
             for each_sublist in self.fields:
