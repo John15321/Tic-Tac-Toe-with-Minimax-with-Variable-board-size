@@ -1,15 +1,12 @@
-'''
-A module containing Game_Mechanics class that is responsible
-for handling game logic.
-'''
+"""A module containing Game_Mechanics class that is responsible for handling game logic."""
 import pygame
 from board_elements import *
 
 
 class HandleWin():
-    '''
+    """
     A simple class that chekcs is there is a winner on the current board
-    '''
+    """
 
     def __init__(self, table):
 
@@ -18,9 +15,9 @@ class HandleWin():
         self.signs = table
 
     def check_horizontal(self, symbol):
-        '''
+        """
         Checks the horizontal axis to see if there is a winner
-        '''
+        """
         for i in range(Board.get_board_size()):
             self.line = 0
             for j in range(Board.get_board_size()):
@@ -34,9 +31,9 @@ class HandleWin():
                     return True
 
     def check_vertical(self, symbol):
-        '''
+        """
         Checks the vertical axis to see if there is a winner
-        '''
+        """
         for j in range(Board.get_board_size()):
             self.line = 0
             for i in range(Board.get_board_size()):
@@ -50,9 +47,9 @@ class HandleWin():
                     return True
 
     def check_diagonal(self, symbol):
-        '''
+        """
         Checks the diagonal axis to see if there is a winner
-        '''
+        """
         win = []
         for i in range(Board.get_row_win()):
             win.append(symbol)
@@ -104,10 +101,10 @@ class HandleWin():
                     return True
 
     def check_if_game_finish(self):
-        '''
+        """
         Simple function for checking if all places on the board are occupaied
         Returns True or False
-        '''
+        """
         for y in range(0, Board.get_board_size()):
             for x in range(0, Board.get_board_size()):
                 if self.signs[y][x] == '-':
@@ -115,18 +112,18 @@ class HandleWin():
         return True
 
     def check_win(self, symbol: str):
-        '''
+        """
         Checks if there is a winner on the current board
-        '''
+        """
         result = self.check_horizontal(symbol) or self.check_vertical(
             symbol) or self.check_diagonal(symbol)
 
         return result
 
     def who_won(self):
-        '''
+        """
         Returns who won the game
-        '''
+        """
         if self.check_win('x'):
             return 'x'
         elif self.check_win('o'):
@@ -135,9 +132,9 @@ class HandleWin():
             return 't'
 
     def calculate_score(self):
-        '''
+        """
         Calcualtes score
-        '''
+        """
         size = Board.get_board_size()
         score = 0
         for i in range(size):
@@ -189,9 +186,9 @@ class HandleWin():
 
 
 class GameMechanics(HandleWin):
-    '''
+    """
     Class responsible for handling game mechanics (mainly the minimax algorithm)
-    '''
+    """
 
     def __init__(self, board_size):
         self.signs = [['-' for j in range(0, board_size)]
@@ -201,9 +198,9 @@ class GameMechanics(HandleWin):
         self.max_depth = 5  # maximum recusion depth level, balances efficiency and AI predictions
 
     def Minimax(self, symbol, depth, a, b):
-        '''
+        """
         The main Minimax algorithm
-        '''
+        """
         if self.check_win(symbol):
             if symbol == 'o':
                 return 10**8
@@ -251,9 +248,9 @@ class GameMechanics(HandleWin):
         return best_score
 
     def best_move(self):
-        '''
+        """
         Returns the best move that the AI should take!
-        '''
+        """
         best_score = (-1)*self.inf
         for i in range(Board.get_board_size()):
             for j in range(Board.get_board_size()):

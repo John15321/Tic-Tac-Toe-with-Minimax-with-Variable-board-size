@@ -1,7 +1,7 @@
-'''
-Python module with Board class. There is going to be only one board therefore it operattes on
-class variables.
-'''
+"""
+Python module with Board class. There is going to be only one board therefore
+it operattes on class variables.
+"""
 import pygame
 import sys
 from config import *
@@ -10,9 +10,9 @@ from game_mechanics import *
 
 
 class SetupBoard(GameMechanics):
-    '''
+    """
     This class sets up game board depending on number of tiles
-    '''
+    """
 
     def __init__(self):
         super().__init__(Board.get_board_size())
@@ -58,9 +58,9 @@ class SetupBoard(GameMechanics):
         screen.blit(text_surf, text_rect)
 
     def end_screen(self, result):
-        '''
+        """
         Screen that shows after the game ends.
-        '''
+        """
         end_screen = True
         while end_screen:
             for event in pygame.event.get():
@@ -84,9 +84,9 @@ class SetupBoard(GameMechanics):
             pygame.display.update()
 
     def update_board(self):
-        '''
+        """
         Function reponsible for updating fields of the board each "frame"
-        '''
+        """
         for y in range(0, Board.get_board_size()):
             for x in range(0, Board.get_board_size()):
                 if self.signs[y][x] != '-':
@@ -95,10 +95,10 @@ class SetupBoard(GameMechanics):
                                                        self.tile_size[1], background_color_for_buttons, str(self.signs[y][x]))
 
     def print_board_to_console(self):
-        '''
+        """
         A simple function that prints the list of current objects on the board
         to the console
-        '''
+        """
         print("")
         for i in range(len(self.signs)):
             print(self.signs[i])
@@ -106,9 +106,9 @@ class SetupBoard(GameMechanics):
         print("")
 
     def draw_board(self):
-        '''
+        """
         This function draws game board
-        '''
+        """
         game = True
 
         while game:

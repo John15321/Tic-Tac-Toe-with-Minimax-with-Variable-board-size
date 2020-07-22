@@ -1,15 +1,13 @@
-'''
-Module with Main Menu loop and Main Game loop
-'''
+"""Module with Main Menu loop and Main Game loop."""
 from config import *
 from buttons import *
 from board import *
 
 
 def game_main_menu():
-    '''
+    """
     Main Menu function for choosing boards size and games row win
-    '''
+    """
     main_menu = True
 
     button_board_size_show = ButtonWithText(350, 557, 100, 64,
@@ -86,9 +84,9 @@ def game_main_menu():
 
 
 def main_game_loop():
-    '''
+    """
     Main Game loop. Function where the player is going to play against teh Minimax algorithm
-    '''
+    """
 
     board = SetupBoard()
     board.draw_board()

@@ -1,6 +1,4 @@
-'''
-Module responsible for configuring screen graphics like color, width, height etc.
-'''
+"""Module responsible for configuring screen graphics like color, width, height etc."""
 import pygame
 
 # Initializing PyGame

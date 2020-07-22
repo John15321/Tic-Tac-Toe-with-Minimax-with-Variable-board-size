@@ -1,7 +1,5 @@
 #!/usr/bin/python
-'''
-Main game file
-'''
+"""Main game file."""
 import sys
 import pygame
 from game_loops import *
